@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Converter</title>
+</head>
+<div class="title">Case Converter</div>
+    <textarea id="ide"></textarea>
+
+<script>
+    function myFuncUpperCase() {
+        var x = document.getElementById("ide").value;
+        document.getElementById("ide").value = x.toUpperCase();
+    }
+    function myFuncLowerCase() {
+        var x = document.getElementById("ide").value;
+        document.getElementById("ide").value = x.toLowerCase();
+    }
+    function myFuncProperCase() {
+        var words = document.getElementById("ide").value.toLowerCase().split(" ");
+        var newwords = [];
+        for (var i = 0; i < words.length; i++) {
+            newwords[i] = words[i].replace(words[i].substr(0,1), words[i].substr(0,1).toUpperCase());
+        }
+        console.log("testowanie Proper");
+        console.log(newwords.join(" "));
+        document.getElementById("ide").value = newwords.join(" ");
+
+    }
+    function myFuncSentenceCase() {
+        var words = document.getElementById("ide").value.toLowerCase().split(". ");
+        var newwords = [];
+        for (var i = 0; i < words.length; i++) {
+            newwords[i] = words[i].replace(words[i].substr(0,1), words[i].substr(0,1).toUpperCase());
+        }
+        console.log("testowanie Sentence");
+        console.log(newwords.join(". "));
+        document.getElementById("ide").value = newwords.join(". ");
+    }
+
+    function download(filename, text) {
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+    // Start file download.
+  //  download("hello.txt","This is the content of my file :)");
+</script>
+    <button id="upper-case" type="button" onclick=myFuncUpperCase()>Upper Case</button>
+    <button id="lower-case" type="button" onclick=myFuncLowerCase()>Lower Case</button>
+    <button id="proper-case" type="button" onclick=myFuncProperCase()>Proper Case</button>
+    <button id="sentence-case" type="button" onclick=myFuncSentenceCase()>Sentence Case</button>
+    <button id="save-text-file" type="button" onclick=download("text.txt",document.getElementById("ide").value)>Save Text File</button>
+</html>
